@@ -10,6 +10,7 @@ var rooms = {};
 var serverMap = {};
 var roomIdOfUsers = {};
 
+
 //设置跨域访问
 app.all('*', function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -109,8 +110,7 @@ exports.createRoom = function(account,userId,roomConf,fnCallback){
 				if(ret){
 					if(data.errcode == 0){
 						fnCallback(0,data.roomid);
-					}
-					else{
+					}else{
 						fnCallback(data.errcode,null);		
 					}
 					return;

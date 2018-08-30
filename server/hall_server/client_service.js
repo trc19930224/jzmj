@@ -7,6 +7,7 @@ var room_service = require("./room_service");
 var app = express();
 var config = null;
 
+// 检查账户和签名字段是否为空
 function check_account(req,res){
 	var account = req.query.account;
 	var sign = req.query.sign;

@@ -111,6 +111,7 @@ app.get('/enter_room',function(req,res){
 	});
 });
 
+//TODO 这里的方法貌似有点问题，这里只判断了参数非空和校验了签名，并没有验证房间是否存在
 app.get('/is_room_runing',function(req,res){
 	var roomId = req.query.roomid;
 	var sign = req.query.sign;

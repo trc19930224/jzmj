@@ -215,6 +215,7 @@ exports.add_user_gems = function(userid,gems,callback){
     });
 };
 
+// 查找房卡
 exports.get_gems = function(account,callback){
     callback = callback == null? nop:callback;
     if(account == null){

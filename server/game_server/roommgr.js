@@ -108,15 +108,16 @@ exports.createRoom = function(creator,roomConf,gems,ip,port,callback){
 	}
 
 	var fnCreate = function(){
+		// 随机生成6位数的房间号
 		var roomId = generateRoomId();
+		// 判断生成的房间号是否和正在打牌的房间或者创建中的房间号重复
 		if(rooms[roomId] != null || creatingRooms[roomId] != null){
 			fnCreate();
-		}
-		else{
+		}else{
 			creatingRooms[roomId] = true;
 			db.is_room_exist(roomId, function(ret) {
-
 				if(ret){
+					// 此种情况可能是创建完房间后服务器因为特殊原因挂掉导致内存数据丢失
 					delete creatingRooms[roomId];
 					fnCreate();
 				}
@@ -256,8 +257,7 @@ exports.enterRoom = function(roomId,userId,userName,callback){
 	if(room){
 		var ret = fnTakeSeat(room);
 		callback(ret);
-	}
-	else{
+	}else{
 		db.get_room_data(roomId,function(dbdata){
 			if(dbdata == null){
 				//找不到房间
